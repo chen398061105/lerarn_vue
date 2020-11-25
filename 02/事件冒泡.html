@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app" @click="divBtn">
+    <button @click.stop="btn">按钮</button>
+  {{message}}
+  监听键盘键的效果
+<!--  <input type="text" @keyup.13="onenter">-->
+<!--  只有一次效果-->
+  <input type="text" @keyup.once="onenter">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '阻止事件冒泡'
+    },
+    methods:{
+      btn() {
+        console.log('btn');
+      },
+      divBtn(){
+        console.log('divbtn');
+      },
+      onenter(){
+        console.log('回车键按下去了');
+      }
+    }
+  })
+</script>
+</body>
+</html>

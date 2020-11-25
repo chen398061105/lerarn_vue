@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .active{
+      color:red;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+<!--  在要绑定的属性前加个冒号或者v-bind：src-->
+  <img :src="imgUrl" alt="">
+<!--  对象绑定语法，大括号后面是对象。当true时候就会添加类名上去-->
+<!--  <h2 :class="{类名1：boolean1，类名2：boolean2，}"></h2>-->
+  <h2 :class="{active:isActive,line:isLine}">{{message}}</h2>
+<!--  原来的class会和绑定的共存，原来的适合做通用属性，绑定的需要改变-->
+  <h2 class="title" :class="{active:isActive,line:isLine}">{{message}}</h2>
+  <button @click="autoChange">点击我改变颜色</button>
+<!--  数组绑定语法 比较少用-->
+  <h2 :class="getClasses()">{{message}}，数组绑定语法</h2>
+
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message:'hello',
+      imgUrl: 'https://img-corp.com/images/logo@2x.png',
+      isActive:true,
+      isLine:true
+    },
+    methods:{
+      autoChange:function () {
+        this.isActive= !this.isActive
+      },
+      getClasses:function () {
+        return {active:this.isActive,line:this.isLine}
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <p>var是js设计上的一种缺陷和错误，大部分时候不能兼容 let是var的完美增强版</p>
+  <p>let块级作用域</p>
+  <p>es6中优先使用const，只有需要改变某一个标识符的时候才使用let</p>
+  {{message}}
+</div>
+<div>
+  <button >1</button>
+  <button >2</button>
+  <button >3</button>
+  <button >4</button>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const name = 'aa';
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'es6语法'+name
+    }
+  })
+</script>
+<script>
+  //es5 老办法解决作用域问题，函数是一个作用域
+  var btns = document.getElementsByTagName("button")
+  // for (var i=0;i<btns.length;i++){
+  //   (function (num) {
+  //       btns[i].addEventListener('click',function () {
+  //         console.log('第' + (num+1) + '个按钮');
+  //       })
+  //   })(i)//i 是for循环里面的i 再传给num
+  // }
+
+  //es6  var改let直接解决
+  for (let i = 0; i <btns.length ; i++) {
+    btns[i].addEventListener('click',function () {
+      console.log('第' + (i+1) + '个按钮');
+    })
+  }
+</script>
+<script>
+  const obj ={
+    name:'abc'
+  };
+  //const 对象不能修改，但是对象的属性可以修改，定义完const之后必须赋值
+  console.log(obj.name);
+  obj.name='aaaaa';
+  console.log(obj.name)
+</script>
+</body>
+</html>

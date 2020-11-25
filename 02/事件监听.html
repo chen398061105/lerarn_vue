@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  {{count}}<br>
+  <button @click="btn">没有参数的方法 增加</button>
+  <button @click="btn1(11111111)">参数的方法</button>
+<!--  手动获取event-->
+  <button @click="btn2(count,$event)">event+参数方法</button>
+  <button @click="btn3">event 方法不带括号</button>
+  <a href=""target="_blank" style="text-align: center"></a>
+
+
+  <h3>会社概要</h3>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      count: 0
+    },
+    methods:{
+      btn(){
+        this.count++
+      },
+      btn1(num){
+        console.log(num);
+      },
+      btn2(num,event){
+        console.log('num:' + num + 'event:' + event);
+      },
+      btn3(event){
+        console.log(event);
+      },
+
+    }
+  })
+</script>
+</body>
+</html>

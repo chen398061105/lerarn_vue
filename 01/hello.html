@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>当前计数：{{counter}}</p>
+    <!--    <button v-on:click="counter++">添加</button>-->
+    <!--    <button v-on:click="counter&#45;&#45;">减去</button>-->
+    <!--    v-on:click ==@click缩写-->
+    <button @click="add()">添加</button>
+    <button @click="sub()">减去</button>
+
+    <ul>
+        <li v-for="item in list">{{item}}</li>
+    </ul>
+</div>
+<script>
+    //方法 method 函数function 区别：方法一般是在绑定一个类里面，函数 是定义在外面的
+    //let 变量 const常量
+    const app = new Vue({
+        el: "#app",//用于挂载的元
+        data: {//绑定对象或者方法
+            counter: 0,
+            list: ['星际', '大话西游', '少年派']
+        },
+        methods: {//方法
+            add: function () {
+                this.counter++
+            },
+            sub: function () {
+                this.counter--
+            }
+        }
+    })
+</script>
+</body>
+</html>

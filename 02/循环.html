@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+ <ul>
+   没有索引的遍历
+   <li v-for="i in moves">{{i}}</li>
+ </ul>
+  <ul>
+    带索引的遍历
+    <li v-for="(item,index) in moves">{{index+1}} {{item}}</li>
+  </ul>
+
+  <ul>
+    遍历对象,如果坐标不用 则遍历的是值
+    <li v-for="(value,key) in info">{{key}} : {{value}}</li>
+  </ul>
+
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      moves:['孙悟空','沙和尚','唐僧'],
+      info:{name:"小明",age:12}
+    }
+  })
+</script>
+
+</body>
+</html>

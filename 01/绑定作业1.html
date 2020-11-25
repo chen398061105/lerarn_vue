@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  .active {
+    color: red;
+  }
+</style>
+<body>
+<div id="app">
+  <!--  点击谁谁变红色-->
+  <ul>
+    <li v-for="(item,index) in movies"
+        @click="change(index)"
+        :class="{active:currentIndex===index}">{{item}}</li>
+  </ul>
+<!--  :class="{active:0===0}"-->
+<!--  :class="{active:0===1}"-->
+<!--  :class="{active:0===2}"-->
+<!--  则每次点击时候改变index的值-->
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      movies: ['海尔兄弟', '火影忍者', '斯外戈'],
+      currentIndex: 0
+    },
+    methods: {
+      change: function (index) {
+          this.currentIndex=index
+      }
+    }
+
+  })
+</script>
+
+</body>
+</html>

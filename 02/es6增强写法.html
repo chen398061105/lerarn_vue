@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //es5
+  const name = 'xiaoming';
+  const age = 19;
+  const obj ={
+    name:name,
+    age:age,
+    run:function () {
+      console.log('es5的函数写法');
+    }
+  };
+  console.log('name:' + obj.name + '\tage:' + obj.age);
+  //es6 属性的增强写法
+  const obj1 ={
+    name,
+    age,
+    eat(){
+      console.log('es6的函数写法');
+    }
+  };
+  console.log('name:' + obj1.name + '\tage:' + obj1.age);
+  obj.run();
+  obj1.eat()
+</script>
+</body>
+</html>

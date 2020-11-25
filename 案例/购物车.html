@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>购物车案例</title>
+  <style>
+    .table, th, td {
+      padding: 10px;
+      border: 1px solid blue;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div v-if="books.length">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>书籍名称</th>
+        <th>出版日期</th>
+        <th>价格</th>
+        <th>数量</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="(item,index) in books">
+        <td>{{item.name}}</td>
+        <td>{{item.date}}</td>
+        <td>{{item.price | showPrice}}</td>
+        <td>
+          <button @click="increment(index)">+</button>
+          {{item.count}}
+          <button @click="decrement(index)" :disabled="item.count <= 1">-</button>
+        </td>
+        <td>
+          <button @click="removeHandle(index)">移除</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <h2 v-else>购物车没有东西！</h2>
+
+  <h2>总价格：{{sumPrice | showPrice}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  // filter，必须有一个返回值boolean，过滤数值的值时候
+  // true 函数内部自动回调的n加入新的数组,无限循环遍历，这是n与条件判断
+  // false 函数内部过滤掉这次n
+  //reduce/map/filter方法
+  const nums = [1, 101, 50, 20, 5];
+  let newNums = nums.filter(function (n) {//n 就是num里面的值
+    return n > 20 //1和20对比 false 扔掉， 101》20 true 加到新的数组
+  });
+  console.log(newNums);
+  //map 每次值*2，想使数组里面某个值产生变化时候
+  let new2nums = newNums.map(function (n) {
+    return n * 2
+  });
+  console.log(new2nums);
+
+  //reduce 对数组中所有内容汇总 比如要么加 要么乘
+  let new3nums = new2nums.reduce(function (preValue, n) {
+    //function (preValue,n) {return } 是参数1 ,0是参数2 就是初始值
+    //第一次 pre=0 n=202, 第二次 pre=202 n=100
+    return preValue + n
+  }, 0);
+  console.log(new3nums);
+
+  //上面方法一套三连 功能 找出数组里面值>2,且 *2 之后的总值
+  let total = nums.filter(function (num) {
+    return num > 20
+  }).map(function (n) {
+    return n * 2
+  }).reduce(function (value, n) {
+    return value + n
+  }, 0);
+  console.log('一套三连：' + total);
+
+  //箭头函数版，func(n) == n=>
+  let newTotal = nums.filter(n => n > 20).map(n => n * 2).reduce((pre, n) => pre + n)
+  console.log('新一套三连：' + newTotal);
+
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      books: [
+        {name: "孙子兵法", date: "2020/01/01", price: 100.00, count: 1},
+        {name: "周易", date: "2020/02/01", price: 120.00, count: 1},
+        {name: "论语", date: "2020/03/01", price: 80.00, count: 1},
+      ]
+    },
+    computed: {
+      sumPrice() {
+        //传统for循环
+        // let totalPrice = 0;
+        //   for (let i = 0; i < this.books.length; i++) {
+        //     totalPrice += this.books[i].count * this.books[i].price;
+        //   }
+
+        // 新的es6 计算方法 直接遍历拿到数组里的值
+        // let totalPrice = 0;
+        // for (let item of this.books) {
+        //   totalPrice += item.price * item.count
+        // }
+        // return totalPrice
+
+        //book 是 books里面的单个对象，高阶用法
+        return this.books.reduce(function (preValue,book) {
+            return preValue + book.price * book.count
+        },0)
+      }
+    }
+    ,
+    methods: {
+      increment(index) {
+        this.books[index].count++
+      },
+      decrement(index) {
+        if (this.books[index].count <= 1) {
+          this.isDisabled = false
+        }
+      },
+      removeHandle(index) {
+        this.books.splice(index, 1)
+      }
+    },
+    filters: {
+      //过滤器，设置价格后面有2位数  使用：<td>{{item.price | showPrice}}</td>
+      showPrice(price) {
+        return '¥' + price.toFixed(2)
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

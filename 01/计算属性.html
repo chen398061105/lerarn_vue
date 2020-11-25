@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{fullName}}</h2>
+  <h2>总价格：{{totalPrice}}</h2>
+  <h2>test：{{test}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      firstName: 'hello',
+      lastName: 'world',
+      books: [
+        {id: 1, name: 'boo1', price: 100},
+        {id: 2, name: 'boo1', price: 1100},
+      ]
+    },
+    //计算属性，一般不用getFullName这样起名，名字起名比较好。调用时候不用加小括号
+    computed: {
+      fullName: function () {
+        return this.firstName + ' ' + this.lastName;
+      },
+      totalPrice: function () {
+        let total = 0;
+        for (let i = 0; i < this.books.length; i++) {
+          total += this.books[i].price;
+        }
+        return total;
+      },
+      //自带的set和get方法
+      test:{
+        set:function () {
+          //一般不设置set方法
+        },
+        get:function () {
+          return 1;
+        },
+
+      }
+    },
+    methods: {}
+
+  })
+</script>
+</body>
+</html>

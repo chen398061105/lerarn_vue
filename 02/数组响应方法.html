@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+ <ul>
+   <li v-for="item in list" :key="item">{{item}}</li>
+ </ul>
+  <button @click="btnClick">添加</button>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      list: ['a','b','c']
+    },
+    methods:{
+      btnClick(){
+        //尾巴添加 响应 立即刷新
+        // this.list.push('a')
+
+        //通过索引修改值,非响应
+        // this.list[0]='eee'
+        // 用splice替换 或者 vue.set方法
+        Vue.set(this.list,0,'hah')
+
+        // shift 删除第一个,pop删除最后一个
+        // this.list.shift()
+
+        //最前面添加
+        // this.list.unshift('h','g')
+
+        // splice 删除，插入，替换作用
+        //删除 ： 参数1 start 起始元素坐标 参数2 要删除的元素个数，如果没有值则删除所有
+        //替换： 参数3 要替换的值，从0开始的2个值替换成后面的参数3的值
+        //插入 ： 第二个元素值是0，后面跟上要插入的值
+        // this.list.splice(0,2,'m','d')
+        // this.list.splice(1,0,'m','d') //从第1个元素前开始插入md
+
+      }
+    }
+  })
+</script>
+</body>
+</html>

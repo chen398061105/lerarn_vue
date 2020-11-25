@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+ <div>
+<!--  该案例 会出现切换类型时候，用户的值出现在email的里面-->
+<!--   原理 vue会创建一个虚拟dom，出于性能考虑，会尽可能复用原来的元素-->
+<!--   解决方法 加一个key-->
+   <span v-if="isUser">
+     用户输入： <input type="text" placeholder="用户输入" key="username">
+   </span>
+   <span v-else="isUser">
+     邮箱输入： <input type="text" placeholder="邮箱输入" key="email">
+   </span>
+
+<!--   只使用一次时候 v-if  使用较多 和 频繁时候使用v-show-->
+<!--   v-if条件为false时候,压根不会有对应的dom元素,而v-show是将元素display设置none-->
+    <h2 v-show="isShow">{{message}}</h2>
+   <button type="button" @click="isUser =!isUser">切换输入</button>
+ </div>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      isUser:true,
+      isShow:true,
+      message:'hello'
+    },
+    methods:{
+
+    }
+  })
+</script>
+
+</body>
+</html>
