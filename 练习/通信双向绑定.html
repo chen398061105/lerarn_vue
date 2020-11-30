@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  <cpn :cnum="num" @changenum="pchangenum"></cpn>-->
+  <cpn :cnum="num" @changenum="pchangenum"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <p>props:{{cnum}}</p>
+    <p>cnum:{{number}}</p>
+<!--    <input type="text" :value="number" @input="numchange">-->
+    <input type="text" v-model="number">
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      num: 11
+    },
+    methods:{
+      pchangenum(value){
+        this.num = parseInt(value)
+      }
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        props: {
+          cnum: Number
+        },
+        data() {
+          return {
+            number: this.cnum
+          }
+        },
+        //watch监听,number()就是data里面的number的名字,参数1新值,参数2旧值
+        watch:{
+          number(newValue,oldValue){
+            this.$emit('changenum',newValue)
+            console.log('new:'+newValue,'old:'+oldValue)
+          }
+        }
+        // methods:{
+          // numchange(event){
+          //   this.number = event.target.value
+          //   this.$emit('changenum',this.number)
+          // }
+        // }
+      },
+    }
+  })
+</script>
+</body>
+</html>

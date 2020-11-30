@@ -5,6 +5,83 @@
   <title>Title</title>
 </head>
 <body>
+<div id="app">
+  <p>v-model基本使用 默认绑定是number类型 绑定input，textarea，radio...</p>
+  bind绑定时候：{{message}}<br/>
+  model双向绑定：<input type="text" v-model="message">
+  <hr>
+  label绑定对应的id值，可以直接点击内容而触发效果<br/>
+  <label for="m">
+    <input type="radio" id="m" v-model="sex" value="man">man
+  </label>
+  <label for="w">
+    <input type="radio" id="w" v-model="sex" value="woman">woman
+  </label>
+  <h2>您选择的性别是：{{sex}}</h2>
+  <hr>
+  <p>checkbox类型</p>
+  <label for="agree">
+    <input type="checkbox" id="agree" v-model="isAgree">同意协议
+  </label>
+  <button :disabled="!isAgree">下一步</button>
+  <hr>
+  <p>复选框类型,值写死了</p>
+  <input type="checkbox" value="篮球" v-model="hobbies">篮球
+  <input type="checkbox" value="足球" v-model="hobbies">足球
+  <input type="checkbox" value="排球" v-model="hobbies">排球
+  <h2>您选择的爱好是：{{hobbies}}</h2>
+  <hr>
+  <p>动态值绑定另一种写法</p>
+  <label :for="item" v-for="item in list">
+    <input type="checkbox" :value="item" :id="item"v-model="hobbies">{{item}}
+  </label>
+  <h2>您选择的爱好是：{{hobbies}}</h2>
+  <hr>
+  <p>select单选类型</p>
+  <select name="abc" id="0" v-model="fruit">
+    <option value="苹果">苹果</option>
+    <option value="香蕉">香蕉</option>
+    <option value="哈密瓜">哈密瓜</option>
+  </select>
+  <h2>您选择的水果是：{{fruit}}</h2>
+
+  <p>select多选类型</p>
+  <select name="abc" id="1" v-model="fruits" multiple>
+    <option value="苹果">苹果</option>
+    <option value="香蕉">香蕉</option>
+    <option value="哈密瓜">哈密瓜</option>
+  </select>
+  <h2>您选择的水果是：{{fruits}}</h2>
+  <hr>
+  <p>修饰符lazy，不能时时显示，要按下回车之类才会有效果</p>
+  <input type="text"v-model.lazy="message">
+  <h2>lazy效果是：{{message}}</h2>
+  <hr>
+  <p>修饰符number指定类型</p>
+  <input type="text" v-model.number="age">
+  <h2>number类型是：{{typeof age}}</h2>
+  <hr>
+  <p>修饰符trim</p>
+  <input type="text" v-model.trim="name">
+  <h2>trim是：{{name}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      sex: 'man',//可以免去name的属性，如果这里指定值，则页面的值也会默认选择
+      isAgree: false,//单选框 布尔
+      hobbies: [], //多选框 数组
+      list: ["排球","篮球","羽毛球"], //多选框 数组
+      fruit: '',
+      fruits: [],
+      age:0,
+      name:''
+    }
+  })
+</script>
 
 </body>
 </html>

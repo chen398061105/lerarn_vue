@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  {{message}}
+  <cpn></cpn>
+<!--  <cpn2></cpn2>-->
+  <hr>
+
+</div>
+  <p>推荐：第一次种分离写法，绑定id template标签</p>
+  <template id="cpn">
+
+    <div>
+      <p>我是分离写法16666的内容</p>
+      <p>{{title}}</p>
+    </div>
+  </template>
+
+  <!--  <p>第2次种分离写法，绑定id 类型必须是：text/x-template</p>-->
+  <!--  <script type="text/x-template" id="cpn">-->
+  <!--    <div>-->
+  <!--      <p>我是分离写法1的内容</p>-->
+  <!--    </div>-->
+  <!--  </script>-->
+
+<script src="../js/vue.js"></script>
+<script>
+  // Vue.component('cpn2', {template: `<div><p>全局语法糖组件</p></div>`});
+  Vue.component('cpn',{
+    template: '#cpn',
+    data(){
+      return{
+        title:'aa'
+      }
+    }
+  })
+  //分离1
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '组件模板抽离'
+    },
+    //组件自己的data属性必须是一个函数
+    components: {
+      'cpn1': {
+        template: `<div><p>局部语法糖组件</p></div>`
+      },
+    }
+  })
+</script>
+</body>
+</html>

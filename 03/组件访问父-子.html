@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+ <cpn ref="show"></cpn>
+  <button @click="btnClick">$ref点击显示子组件信息,推荐</button>
+ <cpn ></cpn>
+  <button @click="btnClick2">$children点击显示子组件信息,不推荐</button>
+</div>
+<template id="cpn">
+  <div>
+
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    //ref调用子组件的方法
+    methods:{
+      btnClick() {
+        //ref是对象类型 模板ref=自定义名 使用this.$ref.自定义名.属性/方法
+        console.log(this.$refs.show.name);
+        this.$refs.show.show()
+      },
+      btnClick2() {
+        console.log(this.$children[0].name);
+        this.$children[0].show();
+      }
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+        data(){
+          return{
+            name:'我是子组件的名字'
+          }
+        },
+        methods:{
+          show(){
+            alert('我被访问了')
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

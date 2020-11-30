@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <div v-if="books.length">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>书籍名称</th>
+        <th>价格</th>
+        <th>数量</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="(item,index) in books">
+        <td>{{item.name}}</td>
+        <td>{{item.price | showPrice}}</td>
+        <td>
+          <button @click="increment(index)">+</button>
+          {{item.count}}
+          <button @click="decrement(index)" :disabled="item.count <= 1">-</button>
+        </td>
+        <td>
+          <button @click="removeHandle(index)">移除</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <h2>总价格：{{totalPrice|showPrice}}</h2>
+  </div>
+  <div v-else="">
+    <p>没有东西啦</p>
+  </div>
+</div>
+</body>
+</html>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      books: [
+        {id: 1, name: '哈利波特', count: 2, price: 100},
+        {id: 2, name: '小毛细', count: 1, price: 200},
+        {id: 3, name: '指环王', count: 3, price: 300},
+        {id: 4, name: 'Go', count: 6, price: 200}
+      ],
+
+    },
+    computed:{
+      totalPrice(){
+        return this.books.reduce(function(preValue,book){
+          return preValue+book.count*book.price
+        },0)
+      }
+    },
+    methods: {
+      increment(index) {
+        this.books[index].count++
+      },
+      decrement(index) {
+        this.books[index].count--
+      },
+      removeHandle(index) {
+        this.books.splice(index, 1)
+      }
+    },
+    filters: {
+      showPrice(price) {
+        return '$' + price.toFixed(2)
+      }
+    }
+  })
+</script>

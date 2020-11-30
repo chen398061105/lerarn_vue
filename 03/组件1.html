@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<p>组件创建三步骤1 Vue.extend() 创建组件构造器</p>
+<p>组件创建三步骤2 Vue.component() 注册组件</p>
+<p>组件创建三步骤3 在Vue的实例范围内使用 </p>
+<hr>
+<div id="app">
+  {{message}}
+  <my-cpn></my-cpn>
+  <cpn></cpn>
+</div>
+<hr>
+<div id="app2">
+  {{message}}
+<!--  <cpn></cpn>-->
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  //1 Vue.extend() 创建组件构造器
+  const cpnC = Vue.extend({
+    template:`<div>
+                  <h2>组件1</h2>
+                  <p>组件1内容</p>
+              </div>`
+  });
+  //这个是全局组件：Vue.component() 注册组件,参数1：想要在末模板中使用的 参数2 构造器
+  Vue.component('my-cpn',cpnC);
+  //局部组件，在各自实例里面注册就行
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '步骤三使用组件'
+    },
+    components: {
+      cpn:cpnC
+    }
+  });
+  const app2 = new Vue({
+    el: '#app2',
+    data: {
+      message: '全局组件'
+    }
+  })
+</script>
+</body>
+</html>

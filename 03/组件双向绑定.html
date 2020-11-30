@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn :number1="num1" :number2="num2" @num2change="getNum2"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <p>绑定的值，不要直接通过子组件修改，应该通过父组件修改</p>
+    <p>props:{{number1}}</p>
+    <p>data新值:{{dnumber1}}</p>
+    <!--    <input type="text" v-model="number1">  这个直接绑定prop的值会报错建议data或者函数替换-->
+    <input type="text" v-model="dnumber1">
+
+    <p>props:{{number2}}</p>
+    <p>data新值:{{dnumber2}}</p>
+    <!--    <input type="text" v-model="dnumber2"> v-model 等同下面效果-->
+    <input type="text" :value="dnumber2" @input="num2">
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      num1: 1,
+      num2: 0,
+    },
+    methods: {
+      getNum2(value) {
+        this.num2 = parseInt(value)
+      }
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        props: {
+          number1: Number,
+          number2: Number,
+        },
+        data() {
+          return {
+            dnumber1: this.dnumber1,
+            dnumber2: this.dnumber2
+          }
+        },
+        methods: {
+          num2(event) {
+            this.dnumber2 = event.target.value
+            //子组件的中数据再返回父组件中
+            this.$emit('num2change', this.dnumber2)
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

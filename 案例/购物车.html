@@ -91,7 +91,8 @@
         {name: "孙子兵法", date: "2020/01/01", price: 100.00, count: 1},
         {name: "周易", date: "2020/02/01", price: 120.00, count: 1},
         {name: "论语", date: "2020/03/01", price: 80.00, count: 1},
-      ]
+      ],
+      // isDisabled:true
     },
     computed: {
       sumPrice() {
@@ -120,9 +121,7 @@
         this.books[index].count++
       },
       decrement(index) {
-        if (this.books[index].count <= 1) {
-          this.isDisabled = false
-        }
+        this.books[index].count--
       },
       removeHandle(index) {
         this.books.splice(index, 1)

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+ <cpn :c-msg="message"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <p>cpn父组件绑定时候驼峰写法改成c-msg，模板使用时候照样用驼峰</p>
+    <h2>{{cMsg}}</h2>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const cpn ={
+    template:'#cpn',
+    props:{
+      cMsg:{
+        type:String,
+        default:'no thing'
+      }
+    }
+  };
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello'
+    },
+    components:{
+      cpn
+    }
+  })
+</script>
+
+</body>
+</html>

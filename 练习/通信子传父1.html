@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <p>父模块的地方</p>
+  <cpn @item-click="btnClick"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <p>子模块地方</p>
+    <button v-for="item in list" @click="itemClick(item,msg)">{{item.name}}</button>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const cpn = {
+    template: '#cpn',
+    data() {
+      return {
+        list: [
+          {id: 1, name: '小明'},
+          {id: 2, name: '小明1'},
+          {id: 3, name: '小明2'},
+        ],
+        msg: 'hello'
+      }
+    },
+    methods: {
+      itemClick(item, msg) {
+        this.$emit('item-click', item, msg)
+      }
+    }
+  };
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello'
+    },
+    components: {
+      cpn
+    },
+    methods: {
+      btnClick(item, msg) {
+        alert(item.name + msg)
+      }
+    }
+  })
+</script>
+</body>
+</html>
