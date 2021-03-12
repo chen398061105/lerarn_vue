@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn><p slot="left">返回</p></cpn>
+  <cpn><p slot="center">检索</p></cpn>
+  <cpn>
+    <button slot="left">后退</button>
+    <input type="text" slot="center">
+    <button slot="right">刷新</button>
+  </cpn>
+</div>
+<template id="cpn">
+  <div>
+    <p>具名插槽,其实就是给插槽指定别名</p>
+    <slot name="left"><p>左边</p></slot>
+    <slot name="center"><p>中间</p></slot>
+    <slot name="right"><p>右边</p></slot>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    components: {
+      cpn: {
+        template: '#cpn'
+      }
+    }
+  })
+</script>
+</body>
+</html>

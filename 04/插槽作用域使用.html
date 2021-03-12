@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<p>组件的数据显示三种效果</p>
+<div id="app">
+  <cpn></cpn>
+  <cpn>
+<!--    2.5以下版本需要写template  slot-scope="slot"-->
+    <template slot-scope="slot">
+      <div>
+        <span v-for="i in slot.data">{{i}}-</span>
+      </div>
+    </template>
+  </cpn>
+
+  <cpn>
+    <!-- 模板中调用slot-scope="slot",使用时候 slot.组件自定义的名字.方法等-->
+    <template slot-scope="slot">
+      <div>
+       <span>{{slot.data.join('*')}}</span>
+      </div>
+    </template>
+  </cpn>
+
+</div>
+<template id="cpn">
+  <div>
+<!--  :data="list" 自定义要绑定的东西  -->
+    <slot :data="list">
+      <ul>
+        <li v-for="item in list">默认:{{item}}</li>
+      </ul>
+    </slot>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    components: {
+      cpn: {
+        template: '#cpn',
+        data() {
+          return {
+            list: ['a', 'b', 'c']
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

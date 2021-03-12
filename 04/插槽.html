@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<p>slot </p>
+<div id="app">
+  <cpn></cpn><hr>
+  <cpn><p>我是替换默认值的</p></cpn><hr>
+  <cpn>
+    <p>aa</p>
+    <span>bb所有都被替换</span>
+  </cpn>
+</div>
+<template id="cpn">
+  <div>
+    <p>组件插槽</p>
+    <slot>默认值:按钮实例  <button>on</button></slot>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  const cpn = {
+    template:'#cpn'
+  };
+  const app = new Vue({
+    el: '#app',
+    components:{
+      cpn
+    }
+  })
+</script>
+</body>
+</html>

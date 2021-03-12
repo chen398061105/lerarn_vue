@@ -1,0 +1,19 @@
+全局安装
+npm install webpack@3.6.0 -g
+局部安装
+cd 目录
+npm install webpack@3.6.0 --save-dev
+
+src 源码 dist打包,发布
+打包使用 方法1
+webpack ./src/main.js ./dist/bundle.js  然后再index文件引入 bundle
+智能打包
+设置配置文件webpack.config.js
+初始化 npm init ,安装package.json
+导入全局path   const path = require('path')
+webpack 打包  * 一般用 npm run build(需要配置)再package.json 里面的script设置映
+默认是全局的version,优先本地的.
+一般情况下要设置本地的
+开发时依赖,打包时候有用
+npm install webpack@3.6.0 --save-dev  package.json:devDependencies这里是开发环境
+
